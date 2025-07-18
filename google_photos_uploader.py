@@ -1,4 +1,15 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# requires-python = ">=3.8"
+# dependencies = [
+#     "google-api-python-client>=2.0.0",
+#     "google-auth-oauthlib>=1.0.0",
+#     "google-auth-httplib2>=0.2.0",
+#     "pillow>=9.0.0",
+#     "piexif>=1.1.3",
+#     "requests>=2.25.0",
+# ]
+# ///
 """
 Google Photos Uploader
 Uploads images to Google Photos with captions extracted from EXIF metadata.
