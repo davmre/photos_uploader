@@ -3,11 +3,11 @@ Script to upload images to Google Photos with captions extracted from EXIF
 metadata.
 
 For some reason, Google Photos does not populate its "description" field from
-EXIF. If you have a bunch of Exif-tagged images you'd like to upload to
+EXIF metadata. If you have a bunch of EXIF-tagged images you'd like to upload to
 Google Photos, this script will do that, and automatically set the descriptions
 based on the EXIF `UserComment` or `ImageDescription` fields.
 
-This whole thing was vibecoded in about half an hour with Claude 4 Sonnet. If
+This whole thing was vibecoded with Claude 4 Sonnet in about half an hour. If
 it doesn't do what you want, try asking Claude to fix it?
 
 ## Features
@@ -20,14 +20,12 @@ it doesn't do what you want, try asking Claude to fix it?
 
 ## Running
 
-Using `uv` (recommended, [install
-it](https://docs.astral.sh/uv/getting-started/installation/) if you don't have
-it):
+Using `uv` (recommended, [install](https://docs.astral.sh/uv/getting-started/installation/) if needed):
 
 ```bash
-git clone https://github.com/davmre/google_photos_uploader.git
-cd google_photos_uploader
-uv run google_photos_uploader.py ~/your_images_dir/ --album "Album To Create"
+git clone https://github.com/davmre/photos_uploader.git
+cd photos_uploader
+uv run photos_uploader.py ~/your_images_dir/ --album "Album To Create"
 ```
 
 On first run, the script will prompt you through the OAth2 authentication
@@ -98,21 +96,3 @@ If EXIF captions aren't being detected:
 - Verify the image has UserComment or ImageDescription fields
 - Some image editors may remove or modify EXIF data
 - The script will upload images without captions if no EXIF description is found
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- Built for the 2025 Google Photos API
-- Uses the Google Photos Library API
-- EXIF metadata extraction with PIL and piexif
