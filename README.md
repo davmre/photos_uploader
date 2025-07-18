@@ -1,6 +1,14 @@
 # Google Photos Uploader
+Script to upload images to Google Photos with captions extracted from EXIF
+metadata.
 
-Upload images to Google Photos with captions extracted from EXIF metadata (UserComment and ImageDescription fields).
+For some reason, Google Photos does not populate its "description" field from
+EXIF. If you have a bunch of Exif-tagged images you'd like to upload to
+Google Photos, this script will do that, and automatically set the descriptions
+based on the EXIF `UserComment` or `ImageDescription` fields.
+
+This whole thing was vibecoded in about half an hour with Claude 4 Sonnet. If
+it doesn't do what you want, try asking Claude to fix it?
 
 ## Features
 
@@ -10,80 +18,21 @@ Upload images to Google Photos with captions extracted from EXIF metadata (UserC
 - Batch upload from directories or individual files
 - Compatible with 2025 Google Photos API restrictions
 
-## Installation
+## Running
 
-### Using uv (recommended)
+Using `uv` (recommended, [install
+it](https://docs.astral.sh/uv/getting-started/installation/) if you don't have
+it):
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/google_photos_uploader.git
+git clone https://github.com/davmre/google_photos_uploader.git
 cd google_photos_uploader
-
-# Install dependencies with uv
-uv pip install -r requirements.txt
+uv run google_photos_uploader.py ~/your_images_dir/ --album "Album To Create"
 ```
 
-### Using pip
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/google_photos_uploader.git
-cd google_photos_uploader
-
-# Create a virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-## Setup
-
-### 1. Create Google Cloud Project
-
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the **Photos Library API**
-4. Go to **Credentials** → **Create Credentials** → **OAuth client ID**
-5. Select **Desktop application**
-6. Download the JSON credentials file
-7. Save it as `~/.google_photos_credentials.json`
-
-### 2. First Run Authentication
-
-On first run, the script will open a browser window for Google OAuth authentication. Follow the prompts to authorize the application.
-
-## Usage
-
-### Create a New Album
-
-```bash
-python3 google_photos_uploader.py image.jpg --album "My New Album"
-```
-
-This will:
-- Create a new album called "My New Album"
-- Upload the image with its EXIF caption as the description
-- Print the album ID for future use
-
-### Add to Existing Album
-
-```bash
-python3 google_photos_uploader.py image2.jpg --album-id "ALBUM_ID_FROM_PREVIOUS_COMMAND"
-```
-
-### Batch Upload Directory
-
-```bash
-python3 google_photos_uploader.py /path/to/photos/ --album "Vacation Photos"
-```
-
-### Upload Multiple Files
-
-```bash
-python3 google_photos_uploader.py photo1.jpg photo2.png photo3.jpeg --album "Mixed Photos"
-```
+On first run, the script will prompt you through the OAth2 authentication
+process to connect to the Google Photos API. Follow the prompts to authorize the
+script.
 
 ## Command Line Options
 
